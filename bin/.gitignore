@@ -1,0 +1,2 @@
+# Don't check in private key files
+*.pem

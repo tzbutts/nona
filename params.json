@@ -1,1 +1,6 @@
-{"name":"Nona","tagline":"Code to help nonas embed images.","body":"Hello!\r\n\r\nThis repository contains source code to help nonas to embed images.\r\n\r\nIt has the following folders:\r\n* chrome/ holds source for the chrome extension\r\n* firefox/ holds source for the firefox extension\r\n\r\nEach folder has a README describing how to build and install the extensions\r\nfrom source.\r\n\r\n<3,\r\ntzbutts","google":"","note":"Don't delete this file! It's used internally to help with page regeneration."}
+{
+  "name":"Nona",
+  "tagline":"Code to help nonas embed images.",
+  "body":"Hello!\r\n\r\nThis repository contains source code to help nonas to embed images.\r\n\r\nIt has the following folders:\r\n* chrome/ holds source for the chrome extension\r\n* firefox/ holds source for the firefox extension\r\n\r\nEach folder has a README describing how to build and install the extensions\r\nfrom source.\r\n\r\n<3,\r\ntzbutts","google":"",
+  "note":"Don't delete this file! It's used internally to help with page regeneration."
+}
