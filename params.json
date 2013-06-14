@@ -1,6 +1,7 @@
 {
   "name":"Nona",
-  "tagline":"Code to help nonas embed images.",
-  "body":"Hello!\r\n\r\nThis repository contains source code to help nonas to embed images.\r\n\r\nIt has the following folders:\r\n* chrome/ holds source for the chrome extension\r\n* firefox/ holds source for the firefox extension\r\n\r\nEach folder has a README describing how to build and install the extensions\r\nfrom source.\r\n\r\n<3,\r\ntzbutts","google":"",
+  "tagline":"Extensions to help nonas embed images.",
+  "body":"Hello!\n\nFrom this page you can download the extensions for Firefox and Chrome, using the above links.\n\n* For Chrome, once you have the .crx file downloaded, open a chrome://extensions window and drag-and-drop the file there.  ouallah\n* For Firefox, clicking the download link should prompt Firefox to directly install it.\n\nThe source can be found in the github link below.  The source has instructions for building the extensions yourself if you would prefer.\n\nOnce the extension is installed it will replace the placeholder image in anon posts with the actual images they are pointing to.\n\nFor issues/feature requests, contact t3r3zi on dreamwidth.\n\n<3",
+  "google":"",
   "note":"Don't delete this file! It's used internally to help with page regeneration."
 }
