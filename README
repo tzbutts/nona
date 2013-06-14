@@ -4,6 +4,10 @@ This repository contains source code to help nonas to embed images.
 
 It has the following folders:
 * chrome/ holds source for the chrome extension
+* firefox/ holds source for the firefox extension
+
+Each folder has a README describing how to build and install the extensions
+from source.
 
 <3,
 tzbutts
