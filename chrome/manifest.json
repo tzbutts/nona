@@ -3,7 +3,7 @@
 
   "name": "Nona Placeholder Embedder",
   "description": "This extension replaces anon image placeholders with the images they point to.",
-  "version": "1.0",
+  "version": "2.0",
 
   "permissions": [
     "http://www.dreamwidth.org/"
