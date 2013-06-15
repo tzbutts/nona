@@ -14,3 +14,8 @@ http://tzbutts.github.io/nona/
 
 <3,
 tzbutts
+
+
+Changelog:
+* v1.0: Initial version.  All placeholders are replaced on page load.
+* v2.0: Update to listen for expanded comments and replace their placeholders.
