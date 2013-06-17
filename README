@@ -1,10 +1,12 @@
 Hello!
 
-This repository contains source code to help nonas to embed images.
+This repository contains source code for nona browser extensions.
 
-It has the following folders:
-* chrome/ holds source for the chrome extension
-* firefox/ holds source for the firefox extension
+It has the following subprojects:
+* PlaceholderExtension allows anonymous image embedding (currently v2.1)
+  - chrome/ holds source for the chrome extension
+  - firefox/ holds source for the firefox extension
+* SaviorExtension replaces comments containing user-defined text with a placeholder (currently in development)
 
 Each folder has a README describing how to build and install the extensions
 from source.
@@ -16,7 +18,7 @@ http://tzbutts.github.io/nona/
 tzbutts
 
 
-Changelog:
+PlaceholderExtension Changelog:
 * v1.0: Initial version.  All placeholders are replaced on page load.
 * v2.0: Update to listen for expanded comments and replace their placeholders.
 * v2.1: Minor improvements, nothing user-visible.
