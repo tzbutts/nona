@@ -7,6 +7,7 @@ It has the following subprojects:
   - chrome/ holds source for the chrome extension
   - firefox/ holds source for the firefox extension
 * SaviorExtension replaces comments containing user-defined text with a placeholder (currently in development)
+  - chrome/ holds source for the chrome extension
 
 Each folder has a README describing how to build and install the extensions
 from source.
