@@ -1,0 +1,30 @@
+This source contains:
+* *.png, maak.jpg: a bunch of icons in different sizes
+* getElementsByClassName-1.0.1.js: a third-party javascript library
+* manifest.json: to tell chrome how to load the extension
+* options-html.js: javascript commands to run in options page
+* options.html: options page
+* options.js: functions for retrieving, saving, restoring, etc. options
+* savior.js: the main part of the extension
+
+To install the extension from source:
+1. Open chrome://extensions and turn on the developer mode checkbox in the
+   upper right corner.
+2. Click the "Load unpacked extension" button and give it the base directory.
+3. ouallah
+   
+To build the .crx from source:
+1. Open chrome://extensions and turn on the developer mode checkbox in the
+   upper right corner.
+2. Click the "Pack extension" button.
+   a. Give the base directory for the extension root directory.
+   b. If generating package for the first time, it will generate a key.  If
+      regenerating after changes, give it the key file that was generated
+      before.
+3. It will save the .crx and .pem file one directory above the base directory.
+4. ouallah
+
+To install the .crx from a file:
+1. Open chrome://extensions.
+2. Drag-and-drop the .crx file onto that tab.
+3. ouallah

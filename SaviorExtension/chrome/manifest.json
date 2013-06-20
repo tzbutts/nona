@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+
+  "name": "Nona Savior",
+  "description": "This extension replaces comments with user-defined keywords with a placeholder.",
+  "version": "1.0",
+
+  "permissions": [
+    "http://www.dreamwidth.org/"
+  ],
+  
+  "browser_action": {
+    "default_icon": "icon16.png",
+    "default_popup": "options.html",
+    "default_title": "Nona Savior"
+  },
+  
+  "options_page": "options.html",
+  
+  "content_scripts": [
+    {
+      "matches": ["http://*.dreamwidth.org/*"],
+      "js": ["getElementsByClassName-1.0.1.js", "savior.js"],
+      "run_at": "document_end"
+    }
+  ],
+  
+  "background": {
+    "scripts": ["options.js"],
+    "persistent": false
+  },
+  
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

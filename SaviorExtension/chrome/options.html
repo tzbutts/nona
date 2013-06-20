@@ -1,0 +1,58 @@
+<!--
+  developed by tzbutts
+-->
+
+<html>
+<head>
+    <title>Options for Nona Savior</title>
+    <style>
+body {
+    background-color: #336699;
+}
+    
+#main {
+    min-width: 400px;
+    border: 3px double #000000;
+    background: #FFFFFF;
+    padding: 5px;
+}
+
+#title {
+    text-align: center;
+}
+
+#add_more_blockers {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+
+<div id="main">
+<h1 id="title">Nona Savior</h1>
+<table>
+<tr><th>Black List</th><th>Options</th></tr>
+
+<tr><td width="40%" valign="top">
+<div id="opt_blockers">
+</div>
+<span id="add_more_blockers">add</span>
+
+</td><td valign="top">
+
+<input type="checkbox" id="opt_block" name="opt_block">
+  <label for="opt_block">Blocker enabled</label><br />
+<input type="checkbox" id="opt_whole_words_only" name="opt_whole_words_only">
+  <label for="opt_whole_words_only">Match blockers using whole words only</label>
+  
+</td></tr></table>
+<button id="save">Save</button> <span id="message" />
+</div>
+</body>
+
+<script src="options.js" type="text/javascript"></script>
+<script src="options-html.js" type="text/javascript"></script>
+
+</html>
