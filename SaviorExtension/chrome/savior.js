@@ -21,49 +21,60 @@ function createPlaceholder(blockedItems) {
 	return newElem;
 }
 
+function checkText(settings, blocker, text) {
+	// see if the text contains the blocker
+	var k = text.toLowerCase().indexOf(blocker.toLowerCase());
+	
+	// if it's found
+	while(k != -1) {
+		// check the "whole words only" property
+		if(settings["whole_words_only"]) {
+			if(k > 0) {
+				// check the character before; if alphanumeric, skip
+				var ch = text[k - 1];
+				if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')) {
+					k = text.toLowerCase().indexOf(blocker.toLowerCase(), k + 1);
+					continue;
+				}
+			}
+			if(k + blocker.length < text.length) {
+				// check the character after; if alphanumeric, skip
+				var ch = content.innerHTML[k + blocker.length];
+				if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')) {
+					k = text.toLowerCase().indexOf(blocker.toLowerCase(), k + 1);
+					continue;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
+	return false;
+}
+
 // find whether or not the comment should be blocked, and do placeholder if so
 function checkComment(settings, title, content) {
 	var blocked = false;
 	var blockedItems = null;
 	var blockers = settings["blockers"];
 	
+	var titleInvisible = title.className && title.className.indexOf("invisible") != -1;
+	
 	// check all blockers
 	for(j = 0; j < blockers.length; j++) {
-		
-		// see if the text contains the blocker
-		k = content.innerHTML.toLowerCase().indexOf(blockers[j].toLowerCase());
-		
-		// if it's found
-		while(k != -1) {
-			// check the "whole words only" property
-			if(settings["whole_words_only"]) {
-				if(k > 0) {
-					// check the character before; if alphanumeric, skip
-					ch = content.innerHTML[k - 1];
-					if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')) {
-						k = content.innerHTML.toLowerCase().indexOf(blockers[j].toLowerCase(), k + 1);
-						continue;
-					}
-				}
-				if(k + blockers[j].length < content.innerHTML.length) {
-					// check the character after; if alphanumeric, skip
-					ch = content.innerHTML[k + blockers[j].length];
-					if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')) {
-						k = content.innerHTML.toLowerCase().indexOf(blockers[j].toLowerCase(), k + 1);
-						continue;
-					}
-				}
-			}
-			
-			// we're going to block this comment
+		if(checkText(settings, blockers[j], content.innerHTML) ||
+				(settings["include_title"] && !titleInvisible &&
+						checkText(settings, blockers[j], title.innerHTML))) {
+			// this comment will be blocked
 			blocked = true;
+			
 			// keep track of which items did it
 			if(blockedItems == null) {
 				blockedItems = blockers[j].toLowerCase();
 			} else {
 				blockedItems += ", " + blockers[j].toLowerCase();
 			}
-			k = -1;
 		}
 	}
 	
@@ -99,6 +110,9 @@ function checkBlockers(settings, rootElement) {
 				continue;
 			}
 			title = title[0];
+			if(title.children.length > 0) {
+				title = title.children[0];
+			}
 			
 			// get the content element
 			content = getElementsByClassName("comment-content", "div", elements[i]);

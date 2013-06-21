@@ -6,6 +6,7 @@
 var defaultSettings = {
 	"block": true,
 	"whole_words_only": true,
+	"include_title": true,
 	"blockers": ["poop", "pee"]
 };
 
@@ -65,6 +66,7 @@ function saveBlockers(name) {
 function saveSettings() {
 	saveBoolSetting("block");
 	saveBoolSetting("whole_words_only");
+	saveBoolSetting("include_title");
 	
 	saveBlockers("blockers");
 	
@@ -132,6 +134,7 @@ function restoreBlockers(name) {
 function restoreSettings() {
 	restoreBoolSetting("block");
 	restoreBoolSetting("whole_words_only");
+	restoreBoolSetting("include_title");
 	
 	restoreBlockers("blockers");
 }
