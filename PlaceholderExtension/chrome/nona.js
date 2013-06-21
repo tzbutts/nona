@@ -4,7 +4,7 @@
 */
 
 var opt_replacePlaceholders = true;
-var opt_replacePlaceholdersInExpands = true;
+var opt_showLabel = true;
 
 var elements, i, src, images, image, newElem, observer;
 
@@ -27,11 +27,13 @@ var replacePlaceholder = function(rootDocument) {
 		    		image.removeAttribute('height');
 		    		image.setAttribute('src', src);
 		            
-		    		// add some text beforehand so we know it was replaced
-		    		newElem = document.createElement('b');
-		    		newElem.innerHTML = "Nona embedded image:";
-		    		elements[i].insertBefore(newElem, image);
-		    		elements[i].insertBefore(document.createElement('br'), image);
+		    		if(opt_showLabel) {
+			    		// add some text beforehand so we know it was replaced
+			    		newElem = document.createElement('b');
+			    		newElem.innerHTML = "Nona embedded image:";
+			    		elements[i].insertBefore(newElem, image);
+			    		elements[i].insertBefore(document.createElement('br'), image);
+		    		}
 		    	}
 		    	
 		    	// remove ljimgplaceholder from class so it doesn't get
@@ -44,7 +46,7 @@ var replacePlaceholder = function(rootDocument) {
 
 replacePlaceholder(document.body);
 
-if(opt_replacePlaceholdersInExpands) {
+if(opt_replacePlaceholders) {
 	// create an observer instance
 	observer = new MutationObserver(function(mutations) {
 		mutations.forEach(function(mutation) {
