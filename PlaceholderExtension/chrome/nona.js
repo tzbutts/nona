@@ -8,7 +8,7 @@ var opt_showLabel = true;
 
 var elements, i, src, images, image, newElem, observer;
 
-var replacePlaceholder = function(rootDocument) {
+var replacePlaceholder = function(settings, rootDocument) {
 	if(opt_replacePlaceholders) {
 		// get all <a class="ljimgplaceholder"> elements
 		elements = getElementsByClassName("ljimgplaceholder", "a", rootDocument);
@@ -25,15 +25,11 @@ var replacePlaceholder = function(rootDocument) {
 		    		// unset the width and height, and set the source
 		    		image.removeAttribute('width');
 		    		image.removeAttribute('height');
+
+		    		// put any text above the image depending on settings
+		    		TEXT[settings["text"]].apply(elements[i], image);
+		    		
 		    		image.setAttribute('src', src);
-		            
-		    		if(opt_showLabel) {
-			    		// add some text beforehand so we know it was replaced
-			    		newElem = document.createElement('b');
-			    		newElem.innerHTML = "Nona embedded image:";
-			    		elements[i].insertBefore(newElem, image);
-			    		elements[i].insertBefore(document.createElement('br'), image);
-		    		}
 		    	}
 		    	
 		    	// remove ljimgplaceholder from class so it doesn't get
@@ -44,25 +40,31 @@ var replacePlaceholder = function(rootDocument) {
 	}
 }
 
-replacePlaceholder(document.body);
+//kick everything off by getting the current settings from the background process
+//once we've gotten the settings, kick off the work to do blocking appropriately
+chrome.runtime.sendMessage({method: "getSettings"}, function(response) {
+	var settings = JSON.parse(response.data);
+	//console.log(settings);
 
-if(opt_replacePlaceholders) {
-	// create an observer instance
-	observer = new MutationObserver(function(mutations) {
-		mutations.forEach(function(mutation) {
-	    for(var j = 0; j < mutation.addedNodes.length; j++) {
-	    	var node = mutation.addedNodes[j];
-	    	if(node.className && node.className.indexOf("poster-anonymous") != -1) {
-	    		replacePlaceholder(node);
-	    	}
-	    }
-		});    
-	});
-	 
-	// pass in the target node, as well as the observer options
-	observer.observe(document.body, { childList: true, subtree: true });
-	 
-	// later, you can stop observing
-	//observer.disconnect();
-}
+	replacePlaceholder(settings, document.body);
 
+	if(opt_replacePlaceholders) {
+		// create an observer instance
+		observer = new MutationObserver(function(mutations) {
+			mutations.forEach(function(mutation) {
+				for(var j = 0; j < mutation.addedNodes.length; j++) {
+					var node = mutation.addedNodes[j];
+					if(node.className && node.className.indexOf("poster-anonymous") != -1) {
+						replacePlaceholder(settings, node);
+					}
+				}
+			});    
+		});
+
+		// pass in the target node, as well as the observer options
+		observer.observe(document.body, { childList: true, subtree: true });
+
+		// later, you can stop observing
+		//observer.disconnect();
+	}
+});
