@@ -28,3 +28,5 @@ SaviorExtension Changelog:
 * v1.0: Initial version.  Comments containing user-configurable block words are replaced with placeholders.
 * v1.1: Option to also check title text for matches.
         No firefox version yet!
+* v1.2: Minor improvements, nothing user-visible.
+* v1.3: Fixed a bug.

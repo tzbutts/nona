@@ -39,7 +39,7 @@ function checkText(settings, blocker, text) {
 			}
 			if(k + blocker.length < text.length) {
 				// check the character after; if alphanumeric, skip
-				var ch = content.innerHTML[k + blocker.length];
+				var ch = text[k + blocker.length];
 				if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9')) {
 					k = text.toLowerCase().indexOf(blocker.toLowerCase(), k + 1);
 					continue;
