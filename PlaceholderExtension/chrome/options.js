@@ -17,7 +17,7 @@ var TEXT = {
 	STD_SIZE : { key: "STD_SIZE", display: "Nona embedded image (WIDTH x HEIGHT)",
 		apply : function(parent, image) {
     		var newElem = document.createElement('b');
-    		newElem.innerHTML = "Nona embedded image:";
+    		newElem.innerHTML = "Nona embedded image (invalid image size):";
     		parent.insertBefore(newElem, image);
     		parent.insertBefore(document.createElement('br'), image);
     		
