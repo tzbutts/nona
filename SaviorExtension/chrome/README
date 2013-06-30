@@ -1,11 +1,12 @@
 This source contains:
-* *.png, maak.jpg: a bunch of icons in different sizes
+* *.png: a bunch of icons in different sizes
 * getElementsByClassName-1.0.1.js: a third-party javascript library
-* manifest.json: to tell chrome how to load the extension
+* manifest.json: to tell Chrome how to load the extension
 * options-html.js: javascript commands to run in options page
 * options.html: options page
 * options.js: functions for retrieving, saving, restoring, etc. options
 * savior.js: the main part of the extension
+* README: this file
 
 To install the extension from source:
 1. Open chrome://extensions and turn on the developer mode checkbox in the

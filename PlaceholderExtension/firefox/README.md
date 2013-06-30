@@ -1,5 +1,8 @@
 This source contains:
-* data/*, lib/*: source written for this extension
+* data/driver.js: main code to get options and do the work
+* data/getElementsByClassName-1.0.1.js: a third-party javascript library
+* data/nona.js: the primary part of the extension
+* lib/main.js: Firefox's entry point
 * icon.png: package icon
 * package.json: to tell Firefox how to load the extension
 * README.md: this file

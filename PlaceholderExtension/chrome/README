@@ -1,8 +1,13 @@
 This source contains:
 * *.png: a bunch of icons in different sizes
+* background.js: javascript to run in background (necessary to send options)
+* driver.js: main code to get options and do the work
 * getElementsByClassName-1.0.1.js: a third-party javascript library
-* manifest.json: to tell chrome how to load the extension
-* nona.js: the main part of the extension
+* manifest.json: to tell Chrome how to load the extension
+* nona.js: the primary part of the extension
+* options-html.js: javascript to run on the options page
+* options.html: options page
+* README: this file
 
 To install the extension from source:
 1. Open chrome://extensions and turn on the developer mode checkbox in the
