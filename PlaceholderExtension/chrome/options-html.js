@@ -17,7 +17,6 @@ function saveEnumSetting(name, enumVar) {
 			}
 		}
 	}
-	//localStorage[name] = JSON.stringify(elem.checked);
 }
 
 // function to save all settings currently on the page
