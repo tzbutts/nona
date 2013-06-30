@@ -3,7 +3,13 @@
     it may have to be updated if the dreamwidth html/css changes
 */
 
-var elements, i, j, k, ch, title, content, newElem;
+// default settings
+var defaultSettings = {
+	"block": true,
+	"whole_words_only": true,
+	"include_title": true,
+	"blockers": ["poop", "pee"]
+};
 
 // creates and returns a placeholder element
 function createPlaceholder(blockedItems) {
@@ -62,7 +68,7 @@ function checkComment(settings, title, content) {
 	var titleInvisible = title.className && title.className.indexOf("invisible") != -1;
 	
 	// check all blockers
-	for(j = 0; j < blockers.length; j++) {
+	for(var j = 0; j < blockers.length; j++) {
 		if(checkText(settings, blockers[j], content.innerHTML) ||
 				(settings["include_title"] && !titleInvisible &&
 						checkText(settings, blockers[j], title.innerHTML))) {
@@ -82,7 +88,7 @@ function checkComment(settings, title, content) {
 		//title.appendChild(document.createTextNode(" [BLOCKED]"));
 		
 		// create the placeholder element
-		newElem = createPlaceholder(blockedItems);
+		var newElem = createPlaceholder(blockedItems);
 		
 		content.parentNode.appendChild(newElem);
 		
@@ -101,11 +107,11 @@ function checkComment(settings, title, content) {
 function checkBlockers(settings, rootElement) {
 	if(settings["block"]) {
 		// get all comments
-		elements = getElementsByClassName("comment", "div", rootElement);
+		var elements = getElementsByClassName("comment", "div", rootElement);
 		
-		for(i = 0; i < elements.length; i++) {
+		for(var i = 0; i < elements.length; i++) {
 			// get the title element
-			title = getElementsByClassName("comment-title", "h4", elements[i]);
+			var title = getElementsByClassName("comment-title", "h4", elements[i]);
 			if(title == null || title.length < 1) {
 				continue;
 			}
@@ -115,7 +121,7 @@ function checkBlockers(settings, rootElement) {
 			}
 			
 			// get the content element
-			content = getElementsByClassName("comment-content", "div", elements[i]);
+			var content = getElementsByClassName("comment-content", "div", elements[i]);
 			if(content == null || content.length < 1) {
 				continue;
 			}
@@ -127,14 +133,7 @@ function checkBlockers(settings, rootElement) {
 	}
 }
 
-// kick everything off by getting the current settings from the background process
-// once we've gotten the settings, kick off the work to do blocking appropriately
-chrome.runtime.sendMessage({method: "getSettings"}, function(response) {
-	var settings = JSON.parse(response.data);
-	//console.log(settings);
-	
-	checkBlockers(settings, document.body);
-
+function addExpandListener(settings) {
 	if(settings["block"]) {
 		// create an observer instance
 		observer = new MutationObserver(function(mutations) {
@@ -154,4 +153,4 @@ chrome.runtime.sendMessage({method: "getSettings"}, function(response) {
 		// later, you can stop observing
 		//observer.disconnect();
 	}
-});
+}

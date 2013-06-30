@@ -21,9 +21,9 @@ function getSettings() {
 
 // background process listening for "getSettings" messages
 chrome.runtime.onMessage.addListener(
-	function(request, sender, sendResponse) {
-		if(request.method == "getSettings") {
-			sendResponse({data: JSON.stringify(getSettings())});
-		}
-	}
+    function(request, sender, sendResponse) {
+    	if(request.method == "getSettings") {
+    		sendResponse({data: JSON.stringify(getSettings())});
+    	}
+    }
 );
