@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+
+  "name": "Nona Placeholder Embedder",
+  "description": "This extension replaces anon image placeholders with the images they point to.",
+  "version": "3.1",
+
+  "permissions": [
+    "http://www.dreamwidth.org/"
+  ],
+  
+  "options_page": "data/options.html",
+  
+  "background": {
+    "scripts": ["data/nona.js", "data/background.js"],
+    "persistent": false
+  },
+  
+  "content_scripts": [
+    {
+      "matches": ["http://*.dreamwidth.org/*.html*"],
+      "js": ["data/getElementsByClassName-1.0.1.js", "data/nona.js", "data/driver.js"],
+      "run_at": "document_end"
+    }
+  ],
+  
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "64": "img/icon64.png",
+    "128": "img/icon128.png"
+  }
+}

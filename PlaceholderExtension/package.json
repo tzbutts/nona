@@ -1,0 +1,38 @@
+{
+  "id": "jid1-BlA9OBklLE3stg",
+  
+  "name": "nona-placeholder",
+  "fullName": "Nona Placeholder Embedder",
+  "description": "This extension replaces anon image placeholders with the images they point to.",
+  "author": "tzbutts",
+  "version": "3.1",
+  
+  "icon": "img/icon48.png",
+  "icon64": "img/icon64.png",
+  "lib": "data",
+  
+  "main": "main",
+  
+  
+  "preferences": [{
+        "name": "text",
+        "title": "Text Placeholder",
+        "description": "Whether to include text above an embedded image",
+        "type": "menulist",
+        "value": "STD",
+        "options" : [
+            {
+                "value": "NONE",
+                "label": "None"
+            },
+            {
+                "value": "STD",
+                "label": "Nona embedded image:"
+            },
+            {
+                "value": "STD_SIZE",
+                "label": "Nona embedded image (WIDTH x HEIGHT):"
+            }
+        ]
+    }]
+}

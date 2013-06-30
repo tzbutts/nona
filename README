@@ -3,9 +3,8 @@ Hello!
 This repository contains source code for nona browser extensions.
 
 It has the following subprojects:
-* PlaceholderExtension allows anonymous image embedding (currently v3.0)
-  - chrome/ holds source for the chrome extension
-  - firefox/ holds source for the firefox extension
+* PlaceholderExtension allows anonymous image embedding.
+  It holds code for both a chrome extension and a firefox extension.
 * SaviorExtension replaces comments containing user-defined text with a placeholder (currently in development)
   - chrome/ holds source for the chrome extension
 
@@ -24,6 +23,7 @@ PlaceholderExtension Changelog:
 * v2.0: Update to listen for expanded comments and replace their placeholders.
 * v2.1, v2.2: Minor improvements, nothing user-visible.
 * v3.0: Add options page to control display text.
+* v3.1: Merge chrome/ and firefox/ into single directory.
 
 
 SaviorExtension Changelog:
