@@ -39,9 +39,9 @@ To build the .crx from source:
 4. ouallah
 
 To install the .crx from a file:
-1. Open chrome://extensions.
-2. Drag-and-drop the .crx file onto that tab.
-3. ouallah
+1.  Open chrome://extensions.
+2.  Drag-and-drop the .crx file onto that tab.
+3.  ouallah
 
 
 Firefox Instructions
@@ -62,6 +62,6 @@ To build the .xpi from source:
 3. ouallah
 
 To install the .xpi from a file:
-1. Open Firefox.
-2. Drag-and-drop the .xpi file onto Firefox.
-3. ouallah
+1.  Open Firefox.
+2.  Drag-and-drop the .xpi file onto Firefox.
+3.  ouallah
