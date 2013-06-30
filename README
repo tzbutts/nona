@@ -23,6 +23,7 @@ PlaceholderExtension Changelog:
 * v1.0: Initial version.  All placeholders are replaced on page load.
 * v2.0: Update to listen for expanded comments and replace their placeholders.
 * v2.1, v2.2: Minor improvements, nothing user-visible.
+* v3.0: Add options page to control display text.
 
 SaviorExtension Changelog:
 * v1.0: Initial version.  Comments containing user-configurable block words are replaced with placeholders.
