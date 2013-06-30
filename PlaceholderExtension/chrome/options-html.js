@@ -46,13 +46,19 @@ function restoreEnumSetting(name, enumVar) {
 		input.setAttribute("value", key);
 		input.setAttribute("name", name);
 		input.setAttribute("type", "radio");
+		input.setAttribute("id", "opt_" + name + "_" + key);
 		
 		if(val == key) {
 			input.checked = true;
 		}
 		
 		elem.appendChild(input);
-		elem.appendChild(document.createTextNode(enumVar[key]["display"]));
+		
+		var label = document.createElement("label");
+		label.setAttribute("for", input.id);
+		label.innerHTML = enumVar[key]["display"];
+		elem.appendChild(label);
+		
 		elem.appendChild(document.createElement("br"));
 	}
 }

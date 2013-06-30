@@ -6,21 +6,19 @@
 var opt_replacePlaceholders = true;
 var opt_showLabel = true;
 
-var elements, i, src, images, image, newElem, observer;
-
-var replacePlaceholder = function(settings, rootDocument) {
+function replacePlaceholder(settings, rootDocument) {
 	if(opt_replacePlaceholders) {
 		// get all <a class="ljimgplaceholder"> elements
-		elements = getElementsByClassName("ljimgplaceholder", "a", rootDocument);
+		var elements = getElementsByClassName("ljimgplaceholder", "a", rootDocument);
 
-		for(i = 0; i < elements.length; i++) {
+		for(var i = 0; i < elements.length; i++) {
 			// get the image source it's linking to
-		    src = elements[i].getAttribute("href");
+		    var src = elements[i].getAttribute("href");
 		    if(src != null) {
 		    	// get the actual placeholder image
-		    	images = elements[i].getElementsByTagName("img");
+		    	var images = elements[i].getElementsByTagName("img");
 		    	if(images.length >= 1) {
-		    		image = images[0];
+		    		var image = images[0];
 
 		    		// unset the width and height, and set the source
 		    		image.removeAttribute('width');
@@ -40,17 +38,10 @@ var replacePlaceholder = function(settings, rootDocument) {
 	}
 }
 
-//kick everything off by getting the current settings from the background process
-//once we've gotten the settings, kick off the work to do blocking appropriately
-chrome.runtime.sendMessage({method: "getSettings"}, function(response) {
-	var settings = JSON.parse(response.data);
-	//console.log(settings);
-
-	replacePlaceholder(settings, document.body);
-
+function addExpandListener(settings) {
 	if(opt_replacePlaceholders) {
 		// create an observer instance
-		observer = new MutationObserver(function(mutations) {
+		var observer = new MutationObserver(function(mutations) {
 			mutations.forEach(function(mutation) {
 				for(var j = 0; j < mutation.addedNodes.length; j++) {
 					var node = mutation.addedNodes[j];
@@ -67,4 +58,4 @@ chrome.runtime.sendMessage({method: "getSettings"}, function(response) {
 		// later, you can stop observing
 		//observer.disconnect();
 	}
-});
+}

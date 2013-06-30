@@ -7,14 +7,14 @@ var TEXT = {
 		apply : function(parent, image) {
 		
 		}},
-	STD      : { key: "STD",      display: "Nona embedded image",
+	STD      : { key: "STD",      display: "Nona embedded image:",
 		apply : function(parent, image) {
     		var newElem = document.createElement('b');
     		newElem.innerHTML = "Nona embedded image:";
     		parent.insertBefore(newElem, image);
     		parent.insertBefore(document.createElement('br'), image);
 		}},
-	STD_SIZE : { key: "STD_SIZE", display: "Nona embedded image (WIDTH x HEIGHT)",
+	STD_SIZE : { key: "STD_SIZE", display: "Nona embedded image (WIDTH x HEIGHT):",
 		apply : function(parent, image) {
     		var newElem = document.createElement('b');
     		newElem.innerHTML = "Nona embedded image (invalid image size):";
