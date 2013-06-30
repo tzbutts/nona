@@ -25,6 +25,7 @@ PlaceholderExtension Changelog:
 * v2.1, v2.2: Minor improvements, nothing user-visible.
 * v3.0: Add options page to control display text.
 
+
 SaviorExtension Changelog:
 * v1.0: Initial version.  Comments containing user-configurable block words are replaced with placeholders.
 * v1.1: Option to also check title text for matches.
