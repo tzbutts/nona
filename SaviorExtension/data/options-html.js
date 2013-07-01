@@ -36,6 +36,8 @@ function saveSettings() {
 	
 	saveBlockers("blockers");
 	
+	doExport();
+	
 	var elem = document.getElementById("message");
 	elem.innerHTML = "Options saved!";
 	setTimeout(function() {
@@ -103,6 +105,48 @@ function restoreSettings() {
 	restoreBoolSetting("include_title");
 	
 	restoreBlockers("blockers");
+	
+	doExport();
+}
+
+// put current settings into import/export text area
+function doExport() {
+	var str = JSON.stringify(localStorage);
+	var elem = document.querySelector("#importexport");
+	elem.value = str;
+	elem.innerHTML = str;
+}
+
+function doImport() {
+	var settings = JSON.parse(document.querySelector("#importexport").value);
+	console.log(localStorage);
+	for(key in settings) {
+		localStorage[key] = settings[key];
+	}
+	console.log(localStorage);
+	restoreSettings();
+}
+
+// switch navigation tab
+function switchTab(event) {
+	var item = event.toElement;
+	if(!item.id) return;
+	
+	for(var i = 0; i < this.children.length; i++) {
+		this.children[i].setAttribute("class", null);
+	}
+	
+	item.setAttribute("class", "selected");
+	
+	var contentID = "content_" + item.id.substring(4);
+	
+	var content = document.querySelector("#content");
+	for(var i = 0; i < content.children.length; i++) {
+		content.children[i].setAttribute("class", "invisible");
+	}
+	
+	content = document.querySelector("#" + contentID);
+	content.setAttribute("class", "visible");
 }
 
 
@@ -116,3 +160,9 @@ document.querySelector('#add_more_blockers').addEventListener('click', addMoreBl
 
 // connect the save button to saveSettings()
 document.querySelector('#save').addEventListener('click', saveSettings);
+
+// connect navigation tabs
+document.querySelector('#nav').addEventListener('click', switchTab);
+
+// connect import button
+document.querySelector('#import').addEventListener('click', doImport);
