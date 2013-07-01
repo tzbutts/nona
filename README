@@ -6,7 +6,7 @@ It has the following subprojects:
 * PlaceholderExtension allows anonymous image embedding.
   It holds code for both the Chrome extension and the Firefox extension.
 * SaviorExtension replaces comments containing user-defined text with a placeholder (currently in development)
-  It currently only has a chrome extension.
+  It currently only has a Chrome extension.
 
 Each folder has a README describing how to build and install the extensions
 from source.
@@ -33,3 +33,4 @@ SaviorExtension Changelog:
 * v1.2: Minor improvements, nothing user-visible.
 * v1.3: Fixed a bug.
 * v1.4: Rearranged code to match placeholder extension.
+* v2.0: Added import/export to options.
