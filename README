@@ -3,10 +3,10 @@ Hello!
 This repository contains source code for nona browser extensions.
 
 It has the following subprojects:
-* PlaceholderExtension allows anonymous image embedding.
-  It holds code for both the Chrome extension and the Firefox extension.
-* SaviorExtension replaces comments containing user-defined text with a placeholder (currently in development)
-  It currently only has a Chrome extension.
+* PlaceholderExtension allows anonymous image embedding on dreamwidth.
+  It holds code for both the Chrome/Opera extension and the Firefox extension.
+* SaviorExtension replaces comments containing user-defined text with a placeholder
+  It currently only has a Chrome/Opera extension.
 
 Each folder has a README describing how to build and install the extensions
 from source.

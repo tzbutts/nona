@@ -12,7 +12,7 @@ var browser = {
 	isFirefox: (navigator.userAgent.indexOf('Firefox') >= 0) ? true : false
 }
 
-if(browser.isChrome) {
+if(browser.isChrome || browser.isOpera) {
 	chrome.runtime.sendMessage({method: "getSettings"}, function(response) {
 		var settings = JSON.parse(response.data);
 		//console.log(settings);

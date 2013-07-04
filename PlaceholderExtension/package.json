@@ -3,7 +3,7 @@
   
   "name": "nona-placeholder",
   "fullName": "Nona Placeholder Embedder",
-  "description": "This extension replaces anon image placeholders with the images they point to.",
+  "description": "Replaces anon image placeholders with the images they point to.",
   "author": "tzbutts",
   "version": "3.2",
   

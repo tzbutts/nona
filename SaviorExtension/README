@@ -1,7 +1,7 @@
 SaviorExtension README
 ======================
 
-This folder contains combined source for both the Firefox and the Chrome
+This folder contains combined source for both the Chrome/Opera and the Firefox
 extension.
 
 Files and sources contained are:
@@ -16,8 +16,8 @@ Files and sources contained are:
 * README: this file
 
 
-Chrome Instructions
--------------------
+Chrome/Opera Instructions
+-------------------------
 
 To install the extension from source:
 1. Open chrome://extensions and turn on the developer mode checkbox in the

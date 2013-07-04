@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Nona Savior",
-  "description": "This extension replaces comments with user-defined keywords with a placeholder.",
+  "description": "Replaces comments containing user-defined keywords with a placeholder.",
   "version": "3.0",
 
   "permissions": [
