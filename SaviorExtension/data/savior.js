@@ -33,7 +33,7 @@ function checkText(settings, blocker, text) {
 	var k = text.toLowerCase().indexOf(blocker.toLowerCase());
 	
 	// if it's found
-	while(k != -1) {
+	while(k != -1) {		
 		// check the "whole words only" property
 		if(settings["whole_words_only"]) {
 			if(k > 0) {
@@ -60,6 +60,18 @@ function checkText(settings, blocker, text) {
 	return false;
 }
 
+function getCommentText(comment) {
+	// strip out those annoying <wbr>s
+	for(var i = 0; i < comment.children.length; i++) {
+		if(comment.children[i].tagName.toLowerCase() == "wbr") {
+			comment.removeChild(comment.children[i]);
+			i--;
+		}
+	}
+	
+	return content.innerHTML;
+}
+
 // find whether or not the comment should be blocked, and do placeholder if so
 function checkComment(settings, title, content) {
 	var blocked = false;
@@ -68,11 +80,14 @@ function checkComment(settings, title, content) {
 	
 	var titleInvisible = title.className && title.className.indexOf("invisible") != -1;
 	
+	var contentText = getCommentText(content);
+	
 	// check all blockers
 	for(var j = 0; j < blockers.length; j++) {
 		var hidden = blockers[j]["hidden"];
 		var phrase = blockers[j]["phrase"];
-		if(checkText(settings, phrase, content.innerHTML) ||
+		
+		if(checkText(settings, phrase, contentText) ||
 				(settings["include_title"] && !titleInvisible &&
 						checkText(settings, phrase, title.innerHTML))) {
 			// this comment will be blocked
