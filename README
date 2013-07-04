@@ -9,7 +9,7 @@ It has the following subprojects:
   It currently only has a Chrome/Opera extension.
 
 Each folder has a README describing how to build and install the extensions
-from source.
+from source.  Note that the Chrome extensions also work for Opera.
 
 If you just want to install pre-built extensions, go here:
 http://tzbutts.github.io/nona/
