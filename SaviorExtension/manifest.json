@@ -3,7 +3,7 @@
 
   "name": "Nona Savior",
   "description": "This extension replaces comments with user-defined keywords with a placeholder.",
-  "version": "2.0",
+  "version": "3.0",
 
   "permissions": [
     "http://www.dreamwidth.org/"
@@ -24,7 +24,7 @@
   
   "content_scripts": [
     {
-      "matches": ["http://*.dreamwidth.org/*"],
+      "matches": ["http://*.dreamwidth.org/*.html*"],
       "js": ["data/getElementsByClassName-1.0.1.js", "data/savior.js", "data/driver.js"],
       "run_at": "document_end"
     }

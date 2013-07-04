@@ -16,11 +16,12 @@ function saveBlockers(name) {
 	var count = 0;
 
 	// check all children of the outer div element
-	for(var i = 0; i < divElem.children.length; i += 2) {
-		var val = divElem.children[i].value;
+	var n = getNumBlockers(divElem);
+	for(var i = 0; i < n; i++) {
+		var elem = getBlockerAt(divElem, i);
 		// if something's been entered in, add it to the list
-		if(val && 0 !== val.length) {
-			values[count] = val;
+		if(elem.value && 0 !== elem.value.length) {
+			values[count] = {"phrase": elem.value, "hidden": elem.type == "password"};
 			count++;
 		}
 	}
@@ -62,18 +63,43 @@ function restoreBoolSetting(name) {
 function addMoreBlockerFieldsToEnd() {
 	var name = "blockers";
 	var divElem = document.querySelector("#opt_" + name);
-	addMoreBlockerFields(name, divElem, divElem.children.length / 2, 5);
+	addMoreBlockerFields(name, divElem, getNumBlockers(divElem), 5);
 }
 
 // adds more blocker fields to the given div element
 function addMoreBlockerFields(name, divElem, startIndex, numToAdd) {
 	for(var i = 0; i < numToAdd; i++) {
-		var elem = document.createElement("input");
-		elem.setAttribute("name", name);
-		elem.setAttribute("id", "opt_" + name + "_" + (startIndex + i));
-		divElem.appendChild(elem);
+		var span = document.createElement("span");
+		span.setAttribute("style", "white-space: nowrap");
+		
+		var inputElem = document.createElement("input");
+		inputElem.setAttribute("name", name);
+		inputElem.setAttribute("id", "opt_" + name + "_" + (startIndex + i));
+		inputElem.setAttribute("type", "text");
+		span.appendChild(inputElem);
+		
+		var hideElem = document.createElement("small");
+		hideElem.innerHTML = "hide";
+		hideElem.className = "link";
+		hideElem.onclick = function(event) {
+			var hide = this.innerHTML == "hide";
+			this.innerHTML = hide ? "show" : "hide";
+			this.parentNode.children[0].setAttribute("type", hide ? "password" : "text");
+		};
+		span.appendChild(hideElem);
+		
+		divElem.appendChild(span);
+		
 		divElem.appendChild(document.createElement("br"));
 	}
+}
+
+function getNumBlockers(elem) {
+	return elem.children.length / 2;
+}
+
+function getBlockerAt(elem, index) {
+	return elem.children[index * 2].children[0];
 }
 
 // restore the list of blockers to the inputs on the page
@@ -88,13 +114,17 @@ function restoreBlockers(name) {
 	var divElem = document.getElementById("opt_" + name);
 	
 	// make sure we have enough slots
-	while(Math.ceil((val.length + 1) / 5) * 5 > divElem.children.length / 2) {
-		addMoreBlockerFields(name, divElem, divElem.children.length / 2, 5);
+	while(Math.ceil((val.length + 1) / 5) * 5 > getNumBlockers(divElem)) {
+		addMoreBlockerFields(name, divElem, getNumBlockers(divElem), 5);
 	}
 	
 	// fill the slots
 	for(var i = 0; i < val.length; i++) {
-		divElem.children[i * 2].setAttribute("value", val[i]);
+		var blocker = val[i];
+		var elem = getBlockerAt(divElem, i);
+		elem.setAttribute("type", blocker["hidden"] ? "password" : "text");
+		elem.setAttribute("value", blocker["phrase"]);
+		elem.parentNode.children[1].innerHTML = blocker["hidden"] ? "show" : "hide";
 	}
 }
 
@@ -117,6 +147,7 @@ function doExport() {
 	elem.innerHTML = str;
 }
 
+// read in settings from inport/export text area
 function doImport() {
 	var settings = JSON.parse(document.querySelector("#importexport").value);
 	console.log(localStorage);

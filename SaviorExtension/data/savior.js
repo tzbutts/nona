@@ -8,7 +8,8 @@ var defaultSettings = {
 	"block": true,
 	"whole_words_only": true,
 	"include_title": true,
-	"blockers": ["poop", "pee"]
+	"blockers": [{"phrase" : "poop", "hidden": false},
+	             {"phrase" : "pee", "hidden" : false}]
 };
 
 // creates and returns a placeholder element
@@ -69,17 +70,21 @@ function checkComment(settings, title, content) {
 	
 	// check all blockers
 	for(var j = 0; j < blockers.length; j++) {
-		if(checkText(settings, blockers[j], content.innerHTML) ||
+		var hidden = blockers[j]["hidden"];
+		var phrase = blockers[j]["phrase"];
+		if(checkText(settings, phrase, content.innerHTML) ||
 				(settings["include_title"] && !titleInvisible &&
-						checkText(settings, blockers[j], title.innerHTML))) {
+						checkText(settings, phrase, title.innerHTML))) {
 			// this comment will be blocked
 			blocked = true;
 			
 			// keep track of which items did it
+			var notif = phrase.toLowerCase();
+			if(hidden) notif = notif[0] + Array(notif.length).join("*");
 			if(blockedItems == null) {
-				blockedItems = blockers[j].toLowerCase();
+				blockedItems = notif;
 			} else {
-				blockedItems += ", " + blockers[j].toLowerCase();
+				blockedItems += ", " + notif;
 			}
 		}
 	}
