@@ -24,6 +24,7 @@ PlaceholderExtension Changelog:
 * v2.1, v2.2: Minor improvements, nothing user-visible.
 * v3.0: Add options page to control display text.
 * v3.1: Merge chrome/ and firefox/ into single directory.
+* v3.2: Update chrome extension to also run on comment preview page.
 
 
 SaviorExtension Changelog:
