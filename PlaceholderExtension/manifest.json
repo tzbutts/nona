@@ -18,7 +18,7 @@
   
   "content_scripts": [
     {
-      "matches": ["http://*.dreamwidth.org/*.html*"],
+      "matches": ["http://*.dreamwidth.org/*.html*", "http://*.dreamwidth.org/talkpost_do"],
       "js": ["data/getElementsByClassName-1.0.1.js", "data/nona.js", "data/driver.js"],
       "run_at": "document_end"
     }
