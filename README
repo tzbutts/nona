@@ -36,3 +36,4 @@ SaviorExtension Changelog:
 * v1.4: Rearranged code to match placeholder extension.
 * v2.0: Added import/export to options.
 * v3.0: Added ability to show/hide blocker item (for triggering words).
+* v3.1: Added some more options.
