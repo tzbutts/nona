@@ -5,23 +5,32 @@
 
 // default settings
 var defaultSettings = {
-	"block": true,
 	"whole_words_only": true,
 	"include_title": true,
 	"blockers": [{"phrase" : "poop", "hidden": false},
-	             {"phrase" : "pee", "hidden" : false}]
+	             {"phrase" : "pee", "hidden" : false}],
+	"show_blockers": true,
+	"placeholder_background": "#A9D0F5", //"#60A0C0");
+	"placeholder_border": "5px double #336699",
+	"placeholder_text": "#000000"
 };
 
 // creates and returns a placeholder element
-function createPlaceholder(blockedItems) {
+function createPlaceholder(settings, blockedItems) {
 	var newElem = document.createElement("div");
-	newElem.style.setProperty("width", "100%");
-	newElem.style.setProperty("background-color", "#60A0C0");
-	newElem.style.setProperty("color", "#000000");
-	newElem.style.setProperty("border", "5px #336699 double");
+	//newElem.style.setProperty("width", "100%");
+	newElem.style.setProperty("right", "10px");
+	newElem.style.setProperty("background-color", settings["placeholder_background"]);
+	newElem.style.setProperty("color", settings["placeholder_text"]);
+	newElem.style.setProperty("border", settings["placeholder_border"]);
 	newElem.style.setProperty("cursor", "pointer");
+	newElem.style.setProperty("padding", "3px");
 	
-	newElem.appendChild(document.createTextNode("Comment blocked for: " + blockedItems + "."));
+	if(settings["show_blockers"]) {
+		newElem.appendChild(document.createTextNode("Comment blocked for: " + blockedItems + "."));
+	} else {
+		newElem.appendChild(document.createTextNode("Comment has been blocked."));
+	}
 	newElem.appendChild(document.createElement("br"));
 	newElem.appendChild(document.createTextNode("To show comment, click this placeholder."));
 	
@@ -108,7 +117,7 @@ function checkComment(settings, title, content) {
 		//title.appendChild(document.createTextNode(" [BLOCKED]"));
 		
 		// create the placeholder element
-		var newElem = createPlaceholder(blockedItems);
+		var newElem = createPlaceholder(settings, blockedItems);
 		
 		content.parentNode.appendChild(newElem);
 		
@@ -125,52 +134,48 @@ function checkComment(settings, title, content) {
 
 // checks all comments for blockers starting at the given root element
 function checkBlockers(settings, rootElement) {
-	if(settings["block"]) {
-		// get all comments
-		var elements = getElementsByClassName("comment", "div", rootElement);
-		
-		for(var i = 0; i < elements.length; i++) {
-			// get the title element
-			var title = getElementsByClassName("comment-title", "h4", elements[i]);
-			if(title == null || title.length < 1) {
-				continue;
-			}
-			title = title[0];
-			if(title.children.length > 0) {
-				title = title.children[0];
-			}
-			
-			// get the content element
-			var content = getElementsByClassName("comment-content", "div", elements[i]);
-			if(content == null || content.length < 1) {
-				continue;
-			}
-			content = content[0];
-			
-			// check it
-			checkComment(settings, title, content);
+	// get all comments
+	var elements = getElementsByClassName("comment", "div", rootElement);
+
+	for(var i = 0; i < elements.length; i++) {
+		// get the title element
+		var title = getElementsByClassName("comment-title", "h4", elements[i]);
+		if(title == null || title.length < 1) {
+			continue;
 		}
+		title = title[0];
+		if(title.children.length > 0) {
+			title = title.children[0];
+		}
+
+		// get the content element
+		var content = getElementsByClassName("comment-content", "div", elements[i]);
+		if(content == null || content.length < 1) {
+			continue;
+		}
+		content = content[0];
+		
+		// check it
+		checkComment(settings, title, content);
 	}
 }
 
 function addExpandListener(settings) {
-	if(settings["block"]) {
-		// create an observer instance
-		observer = new MutationObserver(function(mutations) {
-			mutations.forEach(function(mutation) {
-		    for(var j = 0; j < mutation.addedNodes.length; j++) {
-		    	var node = mutation.addedNodes[j];
-		    	if(node.className && node.className.indexOf("poster-anonymous") != -1) {
-		    		checkBlockers(settings, node);
-		    	}
-		    }
-			});    
-		});
-		 
-		// pass in the target node, as well as the observer options
-		observer.observe(document.body, { childList: true, subtree: true });
-		 
-		// later, you can stop observing
-		//observer.disconnect();
-	}
+	// create an observer instance
+	observer = new MutationObserver(function(mutations) {
+		mutations.forEach(function(mutation) {
+			for(var j = 0; j < mutation.addedNodes.length; j++) {
+				var node = mutation.addedNodes[j];
+				if(node.className && node.className.indexOf("poster-anonymous") != -1) {
+					checkBlockers(settings, node);
+				}
+			}
+		});    
+	});
+
+	// pass in the target node, as well as the observer options
+	observer.observe(document.body, { childList: true, subtree: true });
+
+	// later, you can stop observing
+	//observer.disconnect();
 }

@@ -8,6 +8,12 @@ function saveBoolSetting(name) {
 	localStorage[name] = JSON.stringify(elem.checked);
 }
 
+// save the setting based on text field
+function saveStringSetting(name) {
+	var elem = document.getElementById("opt_" + name);
+	localStorage[name] = JSON.stringify(elem.value);
+}
+
 // save the setting based on the blockers list
 function saveBlockers(name) {
 	var divElem = document.getElementById("opt_" + name);
@@ -29,21 +35,26 @@ function saveBlockers(name) {
 	localStorage[name] = JSON.stringify(values);
 }
 
+function showMessage(id, message) {
+	var elem = document.getElementById(id);
+	elem.innerHTML = message;
+	setTimeout(function() {
+	    elem.innerHTML = "";
+	}, 1500);
+}
+
 // function to save all settings currently on the page
 function saveSettings() {
-	saveBoolSetting("block");
 	saveBoolSetting("whole_words_only");
 	saveBoolSetting("include_title");
+	saveBoolSetting("show_blockers");
+	saveStringSetting("placeholder_background");
+	saveStringSetting("placeholder_border");
+	saveStringSetting("placeholder_text");
 	
 	saveBlockers("blockers");
 	
 	doExport();
-	
-	var elem = document.getElementById("message");
-	elem.innerHTML = "Options saved!";
-	setTimeout(function() {
-	    elem.innerHTML = "";
-	}, 1500);
 }
 
 // function to restore a bool setting to a checkbox
@@ -80,7 +91,7 @@ function addMoreBlockerFields(name, divElem, startIndex, numToAdd) {
 		
 		var hideElem = document.createElement("small");
 		hideElem.innerHTML = "hide";
-		hideElem.className = "link";
+		hideElem.className = "link pre";
 		hideElem.onclick = function(event) {
 			var hide = this.innerHTML == "hide";
 			this.innerHTML = hide ? "show" : "hide";
@@ -128,11 +139,27 @@ function restoreBlockers(name) {
 	}
 }
 
+function restoreStringSetting(name) {
+	var val = localStorage[name];
+	if(val) {
+		val = JSON.parse(val);
+	} else {
+		val = defaultSettings[name];
+	}
+	
+	var elem = document.getElementById("opt_" + name);
+	elem.value = val;
+	elem.innerHTML = val;
+}
+
 // restore all settings from local storage / default settings to the page
 function restoreSettings() {
-	restoreBoolSetting("block");
 	restoreBoolSetting("whole_words_only");
 	restoreBoolSetting("include_title");
+	restoreBoolSetting("show_blockers");
+	restoreStringSetting("placeholder_background");
+	restoreStringSetting("placeholder_border");
+	restoreStringSetting("placeholder_text");
 	
 	restoreBlockers("blockers");
 	
@@ -190,7 +217,16 @@ document.addEventListener('DOMContentLoaded', restoreSettings);
 document.querySelector('#add_more_blockers').addEventListener('click', addMoreBlockerFieldsToEnd);
 
 // connect the save button to saveSettings()
-document.querySelector('#save').addEventListener('click', saveSettings);
+document.querySelector('#save1').addEventListener('click', function() {
+	saveSettings();
+	showMessage("message1", "Blockers saved!");
+});
+
+//connect the save button to saveSettings()
+document.querySelector('#save2').addEventListener('click', function() {
+	saveSettings();
+	showMessage("message2", "Options saved!");
+});
 
 // connect navigation tabs
 document.querySelector('#nav').addEventListener('click', switchTab);

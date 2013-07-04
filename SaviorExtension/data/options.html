@@ -11,7 +11,7 @@ body {
 }
     
 #main {
-    min-width: 400px;
+    min-width: 300px;
     border: 3px double #000000;
     background: #FFFFFF;
     padding: 5px;
@@ -26,6 +26,10 @@ body {
     cursor: pointer;
     color: blue;
     text-decoration: underline;
+}
+
+.pre {
+    font-family: monospace;
 }
 
 #nav {
@@ -48,7 +52,7 @@ body {
 #content {
     right: 5px;
     border: 3px solid #336699;
-    padding: 3px;
+    padding: 10px;
 }
 
 .visible {
@@ -70,39 +74,48 @@ body {
 <h1 id="title">Nona Savior</h1>
 
 <div id="nav">
-<span id="nav_options" class="selected">Options</span>
+<span id="nav_blockers" class="selected">Blockers</span>
+<span id="nav_options">Options</span>
 <span id="nav_importexport">Import/Export</span>
 </div>
 
 <div id="content">
 
-<div id="content_options" class="visible">
-<table>
-<tr><th>Block List</th><th>Options</th></tr>
+<div id="content_blockers" class="visible" style="text-align: center;">
 
-<tr><td width="40%" valign="top">
 <div id="opt_blockers">
 </div>
-<span id="add_more_blockers" class="link">add</span>
+<span id="add_more_blockers" class="link">add</span><br />
+<div style="text-align: left;"><button id="save1">Save</button> <span id="message1" /></div>
 
-</td><td valign="top">
+</div>
 
-<input type="checkbox" id="opt_block" name="opt_block">
-  <label for="opt_block">Blocker enabled</label><br />
-<input type="checkbox" id="opt_whole_words_only" name="opt_whole_words_only">
+<div id="content_options" class="invisible">
+
+<input type="checkbox" id="opt_whole_words_only" name="opt_whole_words_only"></input>
   <label for="opt_whole_words_only">Match blockers using whole words only</label><br />
-<input type="checkbox" id="opt_include_title" name="opt_include_title">
-  <label for="opt_include_title">Include title in text match</label>
-  
-</td></tr></table>
-<button id="save">Save</button> <span id="message" /> <br />
+<input type="checkbox" id="opt_include_title" name="opt_include_title"></input>
+  <label for="opt_include_title">Include comment title when checking for matches</label><br />
+<input type="checkbox" id="opt_show_blockers" name="opt_show_blockers"></input>
+  <label for="opt_show_blockers">Show which blockers caused the comment to be hidden</label><br />
+Placeholder border style and color:<br />
+<div style="width: 30px; display: inline-block;"></div><input type="text" id="opt_placeholder_border" name="opt_placeholder_border"></input><br />
+Placeholder background color:<br />
+<div style="width: 30px; display: inline-block;"></div><input type="text" id="opt_placeholder_background" name="opt_placeholder_background"></input><br />
+Placeholder text color:<br />
+<div style="width: 30px; display: inline-block;"></div><input type="text" id="opt_placeholder_text" name="opt_placeholder_text"></input><br />
+
+<button id="save2">Save</button> <span id="message2" />
+
 </div>
 
 <div id="content_importexport" class="invisible">
+
 <textarea id="importexport"></textarea><br />
 Copy the above text into a file to save. You can load your saved settings by
 pasting it back into this box and hitting the Import button.<br />
 <button id="import">Import</button>
+
 </div>
 
 </div>
