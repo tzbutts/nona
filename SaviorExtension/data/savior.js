@@ -78,7 +78,7 @@ function getCommentText(comment) {
 		}
 	}
 	
-	return content.innerHTML;
+	return comment.innerHTML;
 }
 
 // find whether or not the comment should be blocked, and do placeholder if so
