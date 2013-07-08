@@ -19,9 +19,16 @@ function saveEnumSetting(name, enumVar) {
 	}
 }
 
+function saveBoolSetting(name) {
+	var elem = document.getElementById("opt_" + name);
+	localStorage[name] = JSON.stringify(elem.checked);
+}
+
 // function to save all settings currently on the page
 function saveSettings() {
 	saveEnumSetting("text", TEXT);
+	
+	saveBoolSetting("ignore_statcounter");
 	
 	var elem = document.getElementById("message");
 	elem.innerHTML = "Options saved!";
@@ -31,11 +38,9 @@ function saveSettings() {
 }
 
 function restoreEnumSetting(name, enumVar) {
-	var val = localStorage[name];
-	if(val) {
-		val = JSON.parse(val);
-	} else {
-		val = defaultSettings[name];
+	var val = defaultSettings[name];
+	if(name in localStorage) {
+		val = JSON.parse(localStorage[name]);
 	}
 	
 	var elem = document.getElementById("opt_" + name);
@@ -62,9 +67,21 @@ function restoreEnumSetting(name, enumVar) {
 	}
 }
 
+//function to restore a bool setting to a checkbox
+function restoreBoolSetting(name) {
+	var val = defaultSettings[name];
+	if(name in localStorage) {
+		val = JSON.parse(localStorage[name]);
+	}
+	
+	var elem = document.getElementById("opt_" + name);
+	elem.checked = val;
+}
+
 // restore all settings from local storage / default settings to the page
 function restoreSettings() {
 	restoreEnumSetting("text", TEXT);
+	restoreBoolSetting("ignore_statcounter");
 }
 
 

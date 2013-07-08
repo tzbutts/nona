@@ -27,11 +27,11 @@ if(browser.isChrome || browser.isOpera) {
 		var settings = {};
 		
 		for(var key in defaultSettings) {
-			var val = data[key];
-			if(!val) {
-				val = defaultSettings[key];
+			if(key in data) {
+				settings[key] = data[key];
+			} else {
+				settings[key] = defaultSettings[key];
 			}
-			settings[key] = val;
 		}
 		
 		checkBlockers(settings, document.body);

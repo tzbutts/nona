@@ -59,11 +59,9 @@ function saveSettings() {
 
 // function to restore a bool setting to a checkbox
 function restoreBoolSetting(name) {
-	var val = localStorage[name];
-	if(val) {
-		val = JSON.parse(val);
-	} else {
-		val = defaultSettings[name];
+	var val = defaultSettings[name];
+	if(name in localStorage) {
+		val = JSON.parse(localStorage[name]);
 	}
 	
 	var elem = document.getElementById("opt_" + name);
@@ -115,11 +113,9 @@ function getBlockerAt(elem, index) {
 
 // restore the list of blockers to the inputs on the page
 function restoreBlockers(name) {
-	var val = localStorage[name];
-	if(val) {
-		val = JSON.parse(val);
-	} else {
-		val = defaultSettings[name];
+	var val = defaultSettings[name];
+	if(name in localStorage) {
+		val = JSON.parse(localStorage[name]);
 	}
 	
 	var divElem = document.getElementById("opt_" + name);
@@ -140,11 +136,9 @@ function restoreBlockers(name) {
 }
 
 function restoreStringSetting(name) {
-	var val = localStorage[name];
-	if(val) {
-		val = JSON.parse(val);
-	} else {
-		val = defaultSettings[name];
+	var val = defaultSettings[name];
+	if(name in localStorage) {
+		val = JSON.parse(localStorage[name]);
 	}
 	
 	var elem = document.getElementById("opt_" + name);

@@ -7,13 +7,11 @@ function getSettings() {
 	var settings = {};
 	
 	for(var key in defaultSettings) {
-		var val = localStorage[key];
-		if(val) {
-			val = JSON.parse(val);
+		if(key in localStorage) {
+			settings[key] = JSON.parse(localStorage[key]);
 		} else {
-			val = defaultSettings[key];
+			settings[key] = defaultSettings[key];
 		}
-		settings[key] = val;
 	}
 	
 	return settings;

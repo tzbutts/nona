@@ -25,6 +25,7 @@ PlaceholderExtension Changelog:
 * v3.0: Add options page to control display text.
 * v3.1: Merge chrome/ and firefox/ into single directory.
 * v3.2: Update chrome extension to also run on comment preview page.
+* v3.3: Add option to ignore images from StatCounter.
 
 
 SaviorExtension Changelog:

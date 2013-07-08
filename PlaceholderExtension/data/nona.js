@@ -31,7 +31,8 @@ var TEXT = {
 
 // default settings
 var defaultSettings = {
-	"text": TEXT.STD["key"]
+	"text": TEXT.STD["key"],
+	"ignore_statcounter": true
 };
 
 function replacePlaceholder(settings, rootDocument) {
@@ -42,6 +43,13 @@ function replacePlaceholder(settings, rootDocument) {
 		// get the image source it's linking to
 		var src = elements[i].getAttribute("href");
 		if(src != null) {
+			// skip past URLs with "statcounter" in them
+			if(settings["ignore_statcounter"]) {
+				if(src.toLowerCase().indexOf("statcounter") != -1) {
+					continue;
+				}
+			}
+			
 			// get the actual placeholder image
 			var images = elements[i].getElementsByTagName("img");
 			if(images.length >= 1) {
