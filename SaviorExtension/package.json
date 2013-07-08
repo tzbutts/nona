@@ -1,0 +1,15 @@
+{
+  "id": "jid1-BlA9OBklLE3stg",
+  
+  "name": "nona-savior",
+  "fullName": "Nona Savior",
+  "description": "Replaces comments containing user-defined keywords with a placeholder.",
+  "author": "tzbutts",
+  "version": "3.1",
+  
+  "icon": "data/img/icon48.png",
+  "icon64": "data/img/icon64.png",
+  "lib": "data",
+  
+  "main": "main"
+}

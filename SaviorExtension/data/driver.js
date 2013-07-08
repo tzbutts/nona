@@ -23,7 +23,6 @@ if(browser.isChrome || browser.isOpera) {
 	});
 	
 } else if(browser.isFirefox) {
-	/*
 	self.on("message", function(data) {
 		var settings = {};
 		
@@ -35,12 +34,8 @@ if(browser.isChrome || browser.isOpera) {
 			settings[key] = val;
 		}
 		
-		//var settings = getSettings(data);
-		//console.log(settings);
-
-		replacePlaceholder(settings, document.body);
-
+		checkBlockers(settings, document.body);
+		
 		addExpandListener(settings);
 	});
-	*/
 }

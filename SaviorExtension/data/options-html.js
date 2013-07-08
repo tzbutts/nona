@@ -163,6 +163,8 @@ function restoreSettings() {
 	
 	restoreBlockers("blockers");
 	
+	saveSettings();
+	
 	doExport();
 }
 
@@ -187,8 +189,8 @@ function doImport() {
 
 // switch navigation tab
 function switchTab(event) {
-	var item = event.toElement;
-	if(!item.id) return;
+	var item = event.target;//toElement;
+	if(!item || !item.id) return;
 	
 	for(var i = 0; i < this.children.length; i++) {
 		this.children[i].setAttribute("class", null);
