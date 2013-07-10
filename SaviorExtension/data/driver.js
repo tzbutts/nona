@@ -20,6 +20,8 @@ if(browser.isChrome || browser.isOpera) {
 		checkBlockers(settings, document.body);
 
 		addExpandListener(settings);
+		
+		listen(settings);
 	});
 	
 } else if(browser.isFirefox) {
@@ -37,5 +39,7 @@ if(browser.isChrome || browser.isOpera) {
 		checkBlockers(settings, document.body);
 		
 		addExpandListener(settings);
+		
+		listen(settings);
 	});
 }

@@ -12,7 +12,9 @@ var defaultSettings = {
 	"show_blockers": true,
 	"placeholder_background": "#A9D0F5", //"#60A0C0");
 	"placeholder_border": "5px double #336699",
-	"placeholder_text": "#000000"
+	"placeholder_text": "#000000",
+	
+	"konami": true
 };
 
 // creates and returns a placeholder element
@@ -178,4 +180,69 @@ function addExpandListener(settings) {
 
 	// later, you can stop observing
 	//observer.disconnect();
+}
+
+function shiftyize() {
+	var shifty = "http://www.dreamwidth.org/img/talk/sm10_eyes.gif";
+	
+	// replace all images with shifties!
+	var images = document.getElementsByTagName("img");
+	for(var i = 0, image; image = images[i]; i++) {
+		image.src = shifty;
+	}
+	
+	// add shifties to comment links!
+	var links = getElementsByClassName("comment-interaction-links", "ul", document);
+	var elem, image;
+	for(var i = 0, link; link = links[i]; i++) {
+		elem = document.createElement("li");
+		image = document.createElement("img");
+		image.src = shifty;
+		elem.appendChild(image);
+		link.insertBefore(elem, link.children[0]);
+	}
+	
+	// woll smoth any usernames
+	var users = getElementsByClassName("ljuser", "span", document);
+	for(var i = 0, user; user = users[i]; i++) {
+		user = user.children[1].children[0];
+		var str = "";
+		for(var j = 0, char; char = user.innerHTML[j]; j++) {
+			if(char == 'a' || char == 'e' || char == 'i' || char == 'u' || char == 'y') {
+				str += "o";
+			} else {
+				str += char;
+			}
+		}
+		user.innerHTML = str;
+	}
+	
+	// nonas gets to be meese now, yay c:
+	users = getElementsByClassName("anonymous", "span", document);
+	for(var i = 0, user; user = users[i]; i++) {
+		user.innerHTML = "(Anonymoose)";
+	}
+	
+	// terezi-ify comment text!
+	var comments = getElementsByClassName("comment-content", "div", document);
+	for(var i = 0, comment; comment = comments[i]; i++) {
+		for(var j = 0, text; text = comment.childNodes[j]; j++) {
+			if(text.nodeType === 3) {
+				text.textContent = text.textContent
+					.toUpperCase()
+					.replace(/\.\.\./g, "&hellip;")
+					.replace(/[\.']/g, "")
+					.replace(/\&hellip;/g, "...")
+					.replace(/a/gi, "4")
+					.replace(/i/gi, "1")
+					.replace(/e/gi, "3");
+			}
+		}
+	}
+}
+
+function listen(settings) {
+	if(settings["konami"]) {
+		var easter_egg = new Konami(shiftyize);
+	}
 }

@@ -48,6 +48,7 @@ function saveSettings() {
 	saveBoolSetting("whole_words_only");
 	saveBoolSetting("include_title");
 	saveBoolSetting("show_blockers");
+	saveBoolSetting("konami");
 	saveStringSetting("placeholder_background");
 	saveStringSetting("placeholder_border");
 	saveStringSetting("placeholder_text");
@@ -151,6 +152,7 @@ function restoreSettings() {
 	restoreBoolSetting("whole_words_only");
 	restoreBoolSetting("include_title");
 	restoreBoolSetting("show_blockers");
+	restoreBoolSetting("konami");
 	restoreStringSetting("placeholder_background");
 	restoreStringSetting("placeholder_border");
 	restoreStringSetting("placeholder_text");
