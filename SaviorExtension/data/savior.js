@@ -182,6 +182,28 @@ function addExpandListener(settings) {
 	//observer.disconnect();
 }
 
+function woll_smoth(text) {
+	var str = "";
+	for(var j = 0, char; char = text[j]; j++) {
+		if(char == 'a' || char == 'e' || char == 'i' || char == 'u' || char == 'y') {
+			str += "o";
+		} else {
+			str += char;
+		}
+	}
+	return str;
+}
+
+function onAllText(elem, callback) {
+	for(var i = 0, text; text = elem.childNodes[i]; i++) {
+		if(text.nodeType === 3) {
+			callback(text);
+		} else {
+			onAllText(text, callback);
+		}
+	}
+}
+
 function shiftyize() {
 	var shifty = "http://www.dreamwidth.org/img/talk/sm10_eyes.gif";
 	
@@ -206,15 +228,7 @@ function shiftyize() {
 	var users = getElementsByClassName("ljuser", "span", document);
 	for(var i = 0, user; user = users[i]; i++) {
 		user = user.children[1].children[0];
-		var str = "";
-		for(var j = 0, char; char = user.innerHTML[j]; j++) {
-			if(char == 'a' || char == 'e' || char == 'i' || char == 'u' || char == 'y') {
-				str += "o";
-			} else {
-				str += char;
-			}
-		}
-		user.innerHTML = str;
+		user.innerHTML = woll_smoth(user.innerHTML);
 	}
 	
 	// nonas gets to be meese now, yay c:
@@ -226,24 +240,38 @@ function shiftyize() {
 	// terezi-ify comment text!
 	var comments = getElementsByClassName("comment-content", "div", document);
 	for(var i = 0, comment; comment = comments[i]; i++) {
-		for(var j = 0, text; text = comment.childNodes[j]; j++) {
-			if(text.nodeType === 3) {
-				text.textContent = text.textContent
-					.toUpperCase()
-					.replace(/\.\.\./g, "&hellip;")
-					.replace(/[\.']/g, "")
-					.replace(/\&hellip;/g, "...")
-					.replace(/a/gi, "4")
-					.replace(/i/gi, "1")
-					.replace(/e/gi, "3");
-			}
-		}
+		onAllText(comment, function(text) {
+			text.textContent = text.textContent
+			.toUpperCase()
+			.replace(/\.\.\./g, "&hellip;")
+			.replace(/[\.']/g, "")
+			.replace(/\&hellip;/g, "...")
+			.replace(/a/gi, "4")
+			.replace(/i/gi, "1")
+			.replace(/e/gi, "3");
+		});
 	}
 	
-	// finally, some embeds
+	// woll smoth the actual post
+	var title = getElementsByClassName("entry-title", "h3", document);
+	if(title && title.length >= 1) {
+		title = title[0].children[0];
+		if(title) {
+			title.innerHTML = woll_smoth(title.innerHTML);
+		}
+	}
 	var entry = getElementsByClassName("entry-content", "div", document);
 	if(entry && entry.length >= 1) {
 		entry = entry[0];
+	}
+	if(entry) {
+		onAllText(entry, function(text) {
+			text.textContent = woll_smoth(text.textContent);
+		});
+	}
+	
+	// finally, some embeds
+	if(entry) {
 		var elem = document.createElement("iframe");
 		elem.width = 560;
 		elem.height = 315;
