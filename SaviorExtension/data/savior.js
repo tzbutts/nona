@@ -239,6 +239,19 @@ function shiftyize() {
 			}
 		}
 	}
+	
+	// finally, some embeds
+	var entry = getElementsByClassName("entry-content", "div", document);
+	if(entry && entry.length >= 1) {
+		entry = entry[0];
+		var elem = document.createElement("iframe");
+		elem.width = 560;
+		elem.height = 315;
+		elem.src = "http://www.youtube.com/embed/oHmzOMVBcgU?rel=0&autoplay=1&loop=1";
+		elem.frameborder = 0;
+		elem.allowfullscreen = true;
+		entry.appendChild(elem);
+	}
 }
 
 function listen(settings) {
